@@ -1,0 +1,33 @@
+#!/bin/bash
+
+WHICH=$1
+
+case "$WHICH" in
+	dev)
+		echo "entering dev..."
+		ssh -i ~/.pemdir/mykey.pem user@ec2-1-2-3-4.us-west-1.compute.amazonaws.com
+		;;
+	staging)
+		echo "entering staging..."
+		ssh -i ~/.pemdir/mykey.pem user@site.com
+		;;
+	live)
+		echo "entering production..."
+		ssh -i ~/.pemdir/mykey.pem user@1.2.3.4
+		;;
+	dev2)
+		#append environments or organize 3-tier sys per case, depending on what envs you tend to ssh into
+		echo "appended project2 environment..."
+		echo "info to remember like '/home/staging/(unexpectedname|secondproject)' or 'careful fucker it's production'"
+		ssh -i ~/.pemdir/mykey.pem user@ec2-1-2-3-4.us-west-1.compute.amazonaws.com
+		;;
+	copystr)
+		#string to clipboard
+		echo "entering env foo..."
+		echo -n "cd always" | pbcopy
+		ssh user@server
+		;;
+	*)
+		echo "specify: dev|staging|live|dev2|copystr"
+		;;
+esac

@@ -1,0 +1,45 @@
+#!/bin/bash
+#be careful where you put a file like this / limit info for shared envs, but lordy it helps me keep organized
+
+WHICH=$1
+COPYBOOL=$2
+
+case "$WHICH" in
+	dev)
+		echo "env dev:"
+		echo "dbuser / dbpass"
+		echo "keyname.pem"
+		COPYSTR="user@1-2-3-4.us-west-1.compute.amazonaws.com"
+		echo $COPYSTR
+		echo "https://www.frontend.com/funnystring/to/project.php"
+		;;
+	env2)
+		echo "staging:"
+		echo "dbuser / dbpass hint / dbhost"
+		echo "keyname.pem"
+		COPYSTR="user@1-2-3-4.us-west-1.compute.amazonaws.com:/dir/often/scped/to"
+		echo "1-2-3-4.us-west-1.compute.amazonaws.com"
+		;;
+	loadbalancelist)
+		echo "user @ load-balanced server"
+		echo "Web1 - 1.2.3.4
+			web2 - 1.2.3.4
+			web3 - 1.2.3.4
+			web4 - 1.2.3.4
+			mail - 1.2.3.4
+			mysql 1.2.3.4  #use user2
+			Load Balancer - 1.2.3.4"
+		COPYSTR=""
+		;;
+	*)
+		echo "specify: \$1: dev|env2|loadbalancelist \$2: c for copy"
+		;;
+esac
+
+if [ $COPYBOOL=='c' ]
+then
+echo -n $COPYSTR | pbcopy
+fi
+
+
+
